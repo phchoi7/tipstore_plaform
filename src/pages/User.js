@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -27,6 +27,7 @@ import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 // mock
 import USERLIST from '../_mock/user';
+import { getAllMatchList } from '../services/apiServices';
 
 // ----------------------------------------------------------------------
 
@@ -40,6 +41,9 @@ const TABLE_HEAD = [
 ];
 
 // ----------------------------------------------------------------------
+
+
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -82,6 +86,22 @@ export default function User() {
   const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  
+  const [matchAll,setMatchAll] = useState({});
+  const [isLoading,setLoading] = useState(true);
+
+  useEffect(() => {
+    getAllMatchList().then((response) => {
+      
+      if (response.status === '1') {
+        setMatchAll(response.rows)
+  
+        setLoading(false)
+      }
+    });
+  },[])
+
+  console.log(matchAll)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -130,7 +150,7 @@ export default function User() {
 
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
-  console.log(filteredUsers,'filter')
+ 
 
   const isUserNotFound = filteredUsers.length === 0;
 
@@ -152,6 +172,7 @@ export default function User() {
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
+            
                 <UserListHead
                   order={order}
                   orderBy={orderBy}
@@ -162,6 +183,7 @@ export default function User() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
+                 
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const { id, name, role, status, company, avatarUrl, isVerified } = row;
                     const isItemSelected = selected.indexOf(name) !== -1;

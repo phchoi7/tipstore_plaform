@@ -53,6 +53,7 @@ export default function DashboardApp() {
       }
     });
   },[])
+
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
@@ -76,7 +77,7 @@ export default function DashboardApp() {
                 <AppWidgetSummary title="Today Matches" total={matchAnalyze && matchAnalyze.allMatch} color="error" icon={'ant-design:bug-filled'} />
               </Grid>
 
-              <Grid item xs={12} md={6} lg={8}>
+              <Grid item xs={12} >
                 <AppWebsiteVisits
                   title="Website Visits"
                   subheader="(+43%) than last year"
@@ -112,7 +113,7 @@ export default function DashboardApp() {
                       fill: 'solid',
                       data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
                     },
-                  ]} />
+                  ]}  data={matchAll.rows}/>
               </Grid>
 
               <Grid item xs={12} md={6} lg={4}>
