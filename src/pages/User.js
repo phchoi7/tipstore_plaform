@@ -130,6 +130,8 @@ export default function User() {
 
   const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
+  console.log(filteredUsers,'filter')
+
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
