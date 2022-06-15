@@ -41,7 +41,6 @@ export default function AppWebsiteVisits({ title, subheader, chartLabels, chartD
 
       <Box sx={{ p: 3, pb: 1 ,maxHeight: 650,overflow:'scroll'}} dir="ltr" >
         <AiScoreCard data={data}/>
-        <ReactApexChart type="line" series={chartData} options={chartOptions} height={364} />
       </Box>
     </Card>
   );
