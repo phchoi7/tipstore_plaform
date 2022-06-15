@@ -6,18 +6,54 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {Box , CircularProgress ,Typography} from '@mui/material';
+import "./LiveScore.css";
+
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+function CircularProgressWithLabel(props) {
+    return (
+      <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+        <CircularProgress variant="determinate" {...props} />
+        <Box
+          sx={{
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography variant="caption" component="div" color="text.secondary">
+            {`${Math.round(props.value)}%`}
+          </Typography>
+        </Box>
+      </Box>
+    );
+  }
+
+
+ 
+
+
+  const DetailsButton = () => {
+      return(
+        <a className="matches__stats btn btn--icon">
+        <span className="sr-only">Stats</span>
+        <svg width={24} height={24} viewBox="0 0 24 24">
+          <path d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" />
+        </svg>
+      </a>
+      )
+  }
+
+
 
 export default function aiScoreCard({data}) {
   return (
@@ -30,10 +66,10 @@ export default function aiScoreCard({data}) {
             <TableCell align="right">System Choice 系統分析勝負</TableCell>
             <TableCell align="right">System Pick 系統選擇</TableCell>
             <TableCell align="right">Result 結果</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell align="right">Match Details </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody >
           {data.map((data) => (
             <TableRow
               key={data.homeTeam}
@@ -43,9 +79,10 @@ export default function aiScoreCard({data}) {
                 {data.matchTime}
               </TableCell>
               <TableCell align="right">{data.homeTeam} vs {data.visitTeam}</TableCell>
-              <TableCell align="right">{data.recPercent}</TableCell>
-              <TableCell align="right">{data.result1}</TableCell>
+              <TableCell align="right"><CircularProgressWithLabel value={data.recPercent}/></TableCell>
               <TableCell align="right">{data.matchResult === "胜" ? "主隊" : "客隊"}</TableCell>
+              <TableCell align="right"> {data.result1 === '0:0' ? '未開始': data.result1}</TableCell>
+              <TableCell align="right"><DetailsButton /></TableCell>
             </TableRow>
           ))}
         </TableBody>
