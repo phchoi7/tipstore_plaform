@@ -21,55 +21,71 @@ import {
 } from '../sections/@dashboard/app';
 import { useTheme } from '@mui/material/styles';
 import { faker } from '@faker-js/faker';
+import { useLocation } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 // ----------------------------------------------------------------------
 
-export default function EcommerceShop() {
+export default function Matches() {
   const theme = useTheme();
   const [openFilter, setOpenFilter] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [isLoaded, setLoaded] = useState(true);
   const [matchAnalyze, setMatchAnalyze] = useState();
   const [match, setMatches] = useState();
+  const location = useLocation();
 
   useEffect(() => {
-    getDetailLeftLists().then((response) => {
+    getDetailLeftLists(location.state.matchId).then((response) => {
       setMatchAnalyze(response);
-      setLoading(false);
+    }).finally(() => {
+      setLoaded(false);
     });
 
-    getDetailYcChartsInfo().then((response) => {
+    getDetailYcChartsInfo(location.state.matchId).then((response) => {
       setMatches(response);
+     
+    }).finally(()=>{
       setLoading(false);
     });
   }, []);
 
   console.log('matchAnalyze:',matchAnalyze);
+  console.log('matchs:',match);
 
+  console.log('data : ',location.state)
 
+  const loadingArea = () => {
+    return (
+      <Grid item xs={12} sx={{textAlign:'center'}}>
+                <CircularProgress />
+              </Grid>
+      
+    )
+  }
 
   return (
     <Page title="Dashboard: Products">
       <Container>
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Products
-        </Typography>
-        <Grid container spacing={3}>
-        <Grid item xs={12} sx={{mb: 5 }} >
-          <MatchesCard />
-        </Grid>
+        {isLoading && isLoaded ? loadingArea() : 
+                <><Typography variant="h4" sx={{ mb: 5 }}>
+            Match Details
+          </Typography><Grid container spacing={3}>
+              <Grid item xs={12} sx={{ mb: 5 }}>
+                <MatchesCard guessWin={match ? match.analyInfo.winner : ''} guessHalfFull={match ? match.analyInfo.halfWholeResult : ''} guessScore={match ? match.analyInfo.scoreResult : ''} data={location.state} />
+              </Grid>
 
-        <Grid item xs={12} md={6} lg={4}>
+              <Grid item xs={12} md={6} lg={4}>
                 <AppCurrentVisits
                   title="勝率計算"
                   chartData={[
-                    { label: 'Win', value:  Number(match ? match.analyInfo.winPossibility: 0) },
-                    { label: 'Draw', value: Number(match ? match.analyInfo.drawPossibility: 0) },
-                    { label: 'Lose', value: Number(match ? match.analyInfo.losePossibility: 0)},
+                    { label: 'Win', value: Number(match ? match.analyInfo.winPossibility : 0) },
+                    { label: 'Draw', value: Number(match ? match.analyInfo.drawPossibility : 0) },
+                    { label: 'Lose', value: Number(match ? match.analyInfo.losePossibility : 0) },
                   ]}
                   chartColors={[
                     theme.palette.primary.main,
                     theme.palette.chart.yellow[0],
                     theme.palette.chart.violet[0],
-                   
                   ]} />
               </Grid>
 
@@ -91,8 +107,9 @@ export default function EcommerceShop() {
               </Grid>
 
 
-        <ProductCartWidget />
-        </Grid>
+              <ProductCartWidget />
+            </Grid></>
+}
       </Container>
     </Page>
   );

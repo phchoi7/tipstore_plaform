@@ -28,7 +28,7 @@ export default function DashboardApp() {
   const [matchAnalyze,setMatchAnalyze] = useState({});
   const [isLoading,setLoading] = useState(true);
 
-  const loadingArea = () => {
+ const loadingArea = () => {
     return (
       <Grid item xs={12} sx={{textAlign:'center'}}>
                 <CircularProgress />
@@ -49,8 +49,10 @@ export default function DashboardApp() {
           allMatch:response.total
         }
         setMatchAnalyze(data)
-        setLoading(false)
+        
       }
+    }).finally(()=>{
+      setLoading(false)
     });
   },[])
 

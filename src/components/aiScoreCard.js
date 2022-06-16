@@ -6,15 +6,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Box , CircularProgress ,Typography} from '@mui/material';
+import {Box , CircularProgress ,Typography,Button} from '@mui/material';
 import "./LiveScore.css";
-
+import { useNavigate } from "react-router-dom";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
 function CircularProgressWithLabel(props) {
+
     return (
       <Box sx={{ position: 'relative', display: 'inline-flex' }}>
         <CircularProgress variant="determinate" {...props} />
@@ -42,20 +43,31 @@ function CircularProgressWithLabel(props) {
  
 
 
-  const DetailsButton = () => {
-      return(
-        <a className="matches__stats btn btn--icon">
-        <span className="sr-only">Stats</span>
-        <svg width={24} height={24} viewBox="0 0 24 24">
-          <path d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" />
-        </svg>
-      </a>
-      )
-  }
 
 
 
-export default function aiScoreCard({data}) {
+
+
+export default function AiScoreCard({data}) {
+    const navigate = useNavigate();
+   console.log(data)
+    const DetailsButton = (matchDetails) => {
+        
+        const handelMatchDetails = () => {
+            console.log('navigate!!')
+            navigate("../matches",{ state: matchDetails.matchDetails });
+        }
+
+      
+        return(
+          <Button className="matches__stats btn btn--icon" role='button' onClick={handelMatchDetails}>
+          <span className="sr-only">Stats</span>
+          <svg width={24} height={24} viewBox="0 0 24 24" >
+            <path d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" />
+          </svg>
+        </Button>
+        )
+    }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -82,7 +94,7 @@ export default function aiScoreCard({data}) {
               <TableCell align="right"><CircularProgressWithLabel value={data.recPercent}/></TableCell>
               <TableCell align="right">{data.matchResult === "胜" ? "主隊" : "客隊"}</TableCell>
               <TableCell align="right"> {data.result1 === '0:0' ? '未開始': data.result1}</TableCell>
-              <TableCell align="right"><DetailsButton /></TableCell>
+              <TableCell align="right"><DetailsButton  matchDetails={data}/></TableCell>
             </TableRow>
           ))}
         </TableBody>

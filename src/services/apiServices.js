@@ -47,10 +47,10 @@ export const getSpecialOffer = async () => {
 };
 
 
-  export const getDetailYcChartsInfo = async () => {
+  export const getDetailYcChartsInfo = async (rowNo) => {
     const ProxyServer = 'https://cors.bridged.cc/';
   
-    const res = await fetch(`${ProxyServer}http://www.woxiangwan.com/zcj/jincai/getDetailYcChartsInfo?rowNo=101021719`, {
+    const res = await fetch(`${ProxyServer}http://www.woxiangwan.com/zcj/jincai/getDetailYcChartsInfo?rowNo=${rowNo}`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -63,10 +63,10 @@ export const getSpecialOffer = async () => {
     return res.json();
   };
 
-  export const getDetailLeftLists = async () => {
+  export const getDetailLeftLists = async (rowNo) => {
     const ProxyServer = 'https://cors.bridged.cc/';
   
-    const res = await fetch(`${ProxyServer}http://www.woxiangwan.com/zcj/jincai/getDetailLeftLists?rowNo=101021719`, {
+    const res = await fetch(`${ProxyServer}http://www.woxiangwan.com/zcj/jincai/getDetailLeftLists?rowNo=${rowNo}`, {
       method: 'GET',
       mode: 'cors',
       headers: {

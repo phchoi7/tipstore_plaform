@@ -5,8 +5,9 @@ import merge from 'lodash/merge';
 
 import { Card, CardHeader, Box ,Typography,Grid,Divider} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-
-
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import ScoreboardIcon from '@mui/icons-material/Scoreboard';
+import TimerIcon from '@mui/icons-material/Timer';
 // components
 
 
@@ -14,7 +15,7 @@ import Avatar from '@mui/material/Avatar';
 
 
 
-export default function MatchesCard() {
+export default function MatchesCard({guessWin , guessScore , guessHalfFull,data}) {
   
 
   return (
@@ -28,7 +29,7 @@ export default function MatchesCard() {
         sx={{ width: 80, height: 80}}
       />
         <Typography variant="h4" sx={{ color: 'text.secondary' }}>
-          OR
+          {data.homeTeam}
         </Typography>
         <Typography variant="body1" sx={{ color: 'text.secondary' }}>
           OR
@@ -48,45 +49,36 @@ export default function MatchesCard() {
         sx={{ width: 80, height: 80}}
       />
         <Typography variant="h4" sx={{ color: 'text.secondary' }}>
-          OR
+        {data.visitTeam}
         </Typography>
         <Typography variant="body1" sx={{ color: 'text.main' }}>
           OR
         </Typography>
     </Box>
     </Grid>
-    <Divider />
-    <Grid sx={{textAlign:'center'}}>
-        <Typography variant='h4' sx={{color:'text.secondary'}}>
-            Game Predilection 本場預測
-        </Typography>
-    </Grid>
-    <Grid sx={{display:'flex',justifyContent:'center'}}>
+    <Divider>Recommendations 投注推薦</Divider>
+    <Grid sx={{display:'flex',justifyContent:'center',textAlign:'center'}}>
     <Box sx={{ p: 3, pb: 1 }} dir="ltr" >
    
-        <Typography variant="h4" sx={{ color: 'text.secondary' }}>
-          OR
-        </Typography>
+      
+        <SportsSoccerIcon />
+
         <Typography variant="body1" sx={{ color: 'text.main' }}>
-          OR
+          {guessWin}
         </Typography>
     </Box>
     <Box sx={{ p: 3, pb: 1 }} dir="ltr" >
    
-        <Typography variant="h4" sx={{ color: 'text.secondary' }}>
-          OR
-        </Typography>
+        <TimerIcon />
         <Typography variant="body1" sx={{ color: 'text.main' }}>
-          OR
+          {guessHalfFull}
         </Typography>
     </Box>
     <Box sx={{ p: 3, pb: 1 }} dir="ltr" >
    
-        <Typography variant="h4" sx={{ color: 'text.secondary' }}>
-          OR
-        </Typography>
+        <ScoreboardIcon />
         <Typography variant="body1" sx={{ color: 'text.main' }}>
-          OR
+        {guessScore} 
         </Typography>
     </Box>
     </Grid>
