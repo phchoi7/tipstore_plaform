@@ -69,7 +69,7 @@ export default function DashboardApp() {
         ) : (
           <>
             <Typography variant="h4" sx={{ mb: 5 }}>
-              {user ? `Hi, Welcome back${user.displayName}` : 'Hi , Welcome ! You have to login to see more !'}
+              {user && user ? `Hi, Welcome back ${user.displayName}` : 'Hi , Welcome ! You have to login to see more !'}
             </Typography>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6} md={3}>
@@ -111,6 +111,7 @@ export default function DashboardApp() {
                 <AppWebsiteVisits
                   title="Website Visits"
                   subheader="(+43%) than last year"
+                  user={user && user}
                   chartLabels={[
                     '01/01/2003',
                     '02/01/2003',
