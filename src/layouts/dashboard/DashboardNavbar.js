@@ -44,6 +44,7 @@ DashboardNavbar.propTypes = {
 export default function DashboardNavbar({ onOpenSidebar }) {
   const auth = getAuth();
   const user = auth.currentUser;
+
   return (
     <RootStyle>
       <ToolbarStyle>

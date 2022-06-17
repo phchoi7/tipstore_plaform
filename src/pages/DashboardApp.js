@@ -109,8 +109,8 @@ export default function DashboardApp() {
 
               <Grid item xs={12}>
                 <AppWebsiteVisits
-                  title="Website Visits"
-                  subheader="(+43%) than last year"
+                  title="AI Match Analyst"
+                  subheader="(+43%) profit now"
                   user={user && user}
                   chartLabels={[
                     '01/01/2003',
@@ -149,7 +149,7 @@ export default function DashboardApp() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6} lg={4}>
+              {/* <Grid item xs={12} md={6} lg={4}>
                 <AppCurrentVisits
                   title="Current Visits"
                   chartData={[
@@ -184,9 +184,9 @@ export default function DashboardApp() {
                     { label: 'United Kingdom', value: 1380 },
                   ]}
                 />
-              </Grid>
+              </Grid> */}
 
-              <Grid item xs={12} md={6} lg={4}>
+              {/* <Grid item xs={12} md={6} lg={4}>
                 <AppCurrentSubject
                   title="Current Subject"
                   chartLabels={['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math']}
@@ -228,9 +228,9 @@ export default function DashboardApp() {
                     time: faker.date.past(),
                   }))}
                 />
-              </Grid>
+              </Grid> */}
 
-              <Grid item xs={12} md={6} lg={4}>
+              {/* <Grid item xs={12} md={6} lg={4}>
                 <AppTrafficBySite
                   title="Traffic by Site"
                   list={[
@@ -256,20 +256,7 @@ export default function DashboardApp() {
                     },
                   ]}
                 />
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={8}>
-                <AppTasks
-                  title="Tasks"
-                  list={[
-                    { id: '1', label: 'Create FireStone Logo' },
-                    { id: '2', label: 'Add SCSS and JS files if required' },
-                    { id: '3', label: 'Stakeholder Meeting' },
-                    { id: '4', label: 'Scoping & Estimations' },
-                    { id: '5', label: 'Sprint Showcase' },
-                  ]}
-                />
-              </Grid>
+              </Grid> */}
             </Grid>
           </>
         )}

@@ -72,7 +72,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {user ? user.displayName : account.displayName}
+                {user ? user.displayName : 'Login to get more function'}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {account.role}
@@ -99,11 +99,11 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               Get more?
             </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              From only $69
+              From only $999
             </Typography>
           </Box>
 
-          <Button href="https://material-ui.com/store/items/minimal-dashboard/" target="_blank" variant="contained">
+          <Button href="https://hkjc.com" target="_blank" variant="contained">
             Upgrade to Pro
           </Button>
         </Stack>
