@@ -5,7 +5,7 @@ import ReactApexChart from 'react-apexcharts';
 import { Card, CardHeader, Box } from '@mui/material';
 // components
 import { BaseOptionChart } from '../../../components/chart';
-import AiScoreCard from '../../../components/aiScoreCard'
+import AiScoreCard from '../../../components/aiScoreCard';
 // ----------------------------------------------------------------------
 
 AppWebsiteVisits.propTypes = {
@@ -15,7 +15,7 @@ AppWebsiteVisits.propTypes = {
   chartLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default function AppWebsiteVisits({ title, subheader, chartLabels, chartData, data, ...other }) {
+export default function AppWebsiteVisits({ title, subheader, chartLabels, chartData, data, user, ...other }) {
   const chartOptions = merge(BaseOptionChart(), {
     plotOptions: { bar: { columnWidth: '16%' } },
     fill: { type: chartData.map((i) => i.fill) },
@@ -39,8 +39,8 @@ export default function AppWebsiteVisits({ title, subheader, chartLabels, chartD
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
-      <Box sx={{ p: 3, pb: 1 ,maxHeight: 650,overflow:'scroll'}} dir="ltr" >
-        <AiScoreCard data={data}/>
+      <Box sx={{ p: 3, pb: 1, maxHeight: 650, overflow: 'scroll' }} dir="ltr">
+        <AiScoreCard data={data} />
       </Box>
     </Card>
   );

@@ -21,7 +21,7 @@ export default function Router() {
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
-        { path: 'matches', element: <Matches /> },
+        { path: 'matches/:matchId', element: <Matches /> },
         { path: 'blog', element: <Blog /> },
       ],
     },

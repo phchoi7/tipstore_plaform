@@ -9,6 +9,7 @@ import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
+import { getAuth } from 'firebase/auth';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +42,8 @@ DashboardNavbar.propTypes = {
 };
 
 export default function DashboardNavbar({ onOpenSidebar }) {
+  const auth = getAuth();
+  const user = auth.currentUser;
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -54,7 +57,7 @@ export default function DashboardNavbar({ onOpenSidebar }) {
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
           <LanguagePopover />
           <NotificationsPopover />
-          <AccountPopover />
+          <AccountPopover user={user} />
         </Stack>
       </ToolbarStyle>
     </RootStyle>

@@ -17,69 +17,97 @@ import {
   AppCurrentSubject,
   AppConversionRates,
 } from '../sections/@dashboard/app';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAllMatchList } from '../services/apiServices';
 import CircularProgress from '@mui/material/CircularProgress';
+import { getAuth } from 'firebase/auth';
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
   const theme = useTheme();
-  const [matchAll,setMatchAll] = useState({});
-  const [matchAnalyze,setMatchAnalyze] = useState({});
-  const [isLoading,setLoading] = useState(true);
+  const [matchAll, setMatchAll] = useState({});
+  const [matchAnalyze, setMatchAnalyze] = useState({});
+  const [isLoading, setLoading] = useState(true);
 
- const loadingArea = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  console.log('user:', user);
+
+  const loadingArea = () => {
     return (
-      <Grid item xs={12} sx={{textAlign:'center'}}>
-                <CircularProgress />
-              </Grid>
-      
-    )
-  }
+      <Grid item xs={12} sx={{ textAlign: 'center' }}>
+        <CircularProgress />
+      </Grid>
+    );
+  };
   useEffect(() => {
-    getAllMatchList().then((response) => {
-      
-      if (response.status === '1') {
-        setMatchAll(response)
-   
-        const data = {
-          total : response.titleRate.slice(14, 16),
-          win:response.titleRate.slice(11, 13),
-          rate:response.titleRate.slice(3, 6),
-          allMatch:response.total
+    getAllMatchList()
+      .then((response) => {
+        if (response.status === '1') {
+          setMatchAll(response);
+
+          const data = {
+            total: response.titleRate.slice(14, 16),
+            win: response.titleRate.slice(11, 13),
+            rate: response.titleRate.slice(3, 6),
+            allMatch: response.total,
+          };
+          setMatchAnalyze(data);
         }
-        setMatchAnalyze(data)
-        
-      }
-    }).finally(()=>{
-      setLoading(false)
-    });
-  },[])
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
-        {isLoading ? loadingArea() : 
-        <><Typography variant="h4" sx={{ mb: 5 }}>
-            Hi, Welcome back
-          </Typography><Grid container spacing={3}>
+        {isLoading ? (
+          loadingArea()
+        ) : (
+          <>
+            <Typography variant="h4" sx={{ mb: 5 }}>
+              {user ? `Hi, Welcome back${user.displayName}` : 'Hi , Welcome ! You have to login to see more !'}
+            </Typography>
+            <Grid container spacing={3}>
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Weekly Matches" total={matchAnalyze && Number(matchAnalyze.total)} icon={'ant-design:android-filled'} />
+                <AppWidgetSummary
+                  title="Weekly Matches"
+                  total={matchAnalyze && Number(matchAnalyze.total)}
+                  icon={'ant-design:android-filled'}
+                />
               </Grid>
 
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Correct Matches" total={matchAnalyze && Number(matchAnalyze.win)} color="info" icon={'ant-design:apple-filled'} />
+                <AppWidgetSummary
+                  title="Correct Matches"
+                  total={matchAnalyze && Number(matchAnalyze.win)}
+                  color="info"
+                  icon={'ant-design:apple-filled'}
+                />
               </Grid>
 
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Win Rate" total={matchAnalyze && matchAnalyze.rate} color="warning" icon={'ant-design:windows-filled'} />
+                <AppWidgetSummary
+                  title="Win Rate"
+                  total={matchAnalyze && matchAnalyze.rate}
+                  color="warning"
+                  icon={'ant-design:windows-filled'}
+                />
               </Grid>
 
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Today Matches" total={matchAnalyze && matchAnalyze.allMatch} color="error" icon={'ant-design:bug-filled'} />
+                <AppWidgetSummary
+                  title="Today Matches"
+                  total={matchAnalyze && matchAnalyze.allMatch}
+                  color="error"
+                  icon={'ant-design:bug-filled'}
+                />
               </Grid>
 
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <AppWebsiteVisits
                   title="Website Visits"
                   subheader="(+43%) than last year"
@@ -115,7 +143,9 @@ export default function DashboardApp() {
                       fill: 'solid',
                       data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
                     },
-                  ]}  data={matchAll.rows}/>
+                  ]}
+                  data={matchAll.rows}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={4}>
@@ -132,7 +162,8 @@ export default function DashboardApp() {
                     theme.palette.chart.blue[0],
                     theme.palette.chart.violet[0],
                     theme.palette.chart.yellow[0],
-                  ]} />
+                  ]}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={8}>
@@ -150,7 +181,8 @@ export default function DashboardApp() {
                     { label: 'Netherlands', value: 1100 },
                     { label: 'United States', value: 1200 },
                     { label: 'United Kingdom', value: 1380 },
-                  ]} />
+                  ]}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={4}>
@@ -162,7 +194,8 @@ export default function DashboardApp() {
                     { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
                     { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] },
                   ]}
-                  chartColors={[...Array(6)].map(() => theme.palette.text.secondary)} />
+                  chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={8}>
@@ -174,7 +207,8 @@ export default function DashboardApp() {
                     description: faker.name.jobTitle(),
                     image: `/static/mock-images/covers/cover_${index + 1}.jpg`,
                     postedAt: faker.date.recent(),
-                  }))} />
+                  }))}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={4}>
@@ -191,7 +225,8 @@ export default function DashboardApp() {
                     ][index],
                     type: `order${index + 1}`,
                     time: faker.date.past(),
-                  }))} />
+                  }))}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={4}>
@@ -218,7 +253,8 @@ export default function DashboardApp() {
                       value: 443232,
                       icon: <Iconify icon={'eva:twitter-fill'} color="#1C9CEA" width={32} height={32} />,
                     },
-                  ]} />
+                  ]}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={8}>
@@ -230,10 +266,12 @@ export default function DashboardApp() {
                     { id: '3', label: 'Stakeholder Meeting' },
                     { id: '4', label: 'Scoping & Estimations' },
                     { id: '5', label: 'Sprint Showcase' },
-                  ]} />
+                  ]}
+                />
               </Grid>
-            </Grid></>
-        }
+            </Grid>
+          </>
+        )}
       </Container>
     </Page>
   );
