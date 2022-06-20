@@ -33,22 +33,54 @@ export function returnTeamIcon(name) {
       return 'https://sortitoutsi.net/uploads/team/1708.png';
     case '皇马':
       return 'https://sortitoutsi.net/uploads/team/1736.png';
+    // 英超
     case '西汉姆联':
       return 'https://sortitoutsi.net/uploads/team/735.png';
     case '切尔西':
       return 'https://sortitoutsi.net/uploads/team/630.png';
     case '阿森纳':
       return 'https://sortitoutsi.net/uploads/team/602.png';
-    case '尤文图斯':
-      return 'https://sortitoutsi.net/uploads/team/1139.png';
+    case '水晶宫':
+      return 'https://sortitoutsi.net/uploads/team/642.png';
+    case '阿斯顿维拉':
+      return 'https://sortitoutsi.net/uploads/team/603.png';
+    case '布伦特福德':
+      return 'https://sortitoutsi.net/uploads/team/617.png';
+    case '布莱顿':
+      return 'https://sortitoutsi.net/uploads/team/618.png';
+    case '伯恩利':
+      return 'https://sortitoutsi.net/uploads/team/622.png';
+    case '埃弗顿':
+      return 'https://sortitoutsi.net/uploads/team/650.png';
+    case '莱切斯特城':
+      return 'https://sortitoutsi.net/uploads/team/673.png';
+    case '利物浦':
+      return 'https://sortitoutsi.net/uploads/team/676.png';
+    case '曼彻斯特城':
+      return 'https://sortitoutsi.net/uploads/team/679.png';
+    case '曼彻斯特联':
+      return 'https://sortitoutsi.net/uploads/team/680.png';
+    case '纽卡斯尔联':
+      return 'https://sortitoutsi.net/uploads/team/688.png';
+    case '南安普敦':
+      return 'https://sortitoutsi.net/uploads/team/713.png';
     case '诺维奇':
       return 'https://sortitoutsi.net/uploads/team/691.png';
+    case '利兹联':
+      return 'https://sortitoutsi.net/uploads/team/671.png';
+    case '托特纳姆热刺':
+      return 'https://sortitoutsi.net/uploads/team/728.png';
+    case '沃特福德':
+      return 'https://sortitoutsi.net/uploads/team/732.png';
+    case '狼队':
+      return 'https://sortitoutsi.net/uploads/team/740.png';
+    // 英超
+    case '尤文图斯':
+      return 'https://sortitoutsi.net/uploads/team/1139.png';
     case '吉马良斯':
       return 'https://sortitoutsi.net/uploads/team/1494.png';
     case '巴黎圣日尔曼':
       return 'https://sortitoutsi.net/uploads/team/868.png';
-    case '利兹联':
-      return 'https://sortitoutsi.net/uploads/team/671.png';
     case '西班牙人':
       return 'https://sortitoutsi.net/uploads/team/1725.png';
     case '金泉尚武':
@@ -101,7 +133,6 @@ export function returnTeamIcon(name) {
       return 'https://sortitoutsi.net/uploads/team/786384.png';
     case '济州联队':
       return 'https://sortitoutsi.net/uploads/team/106817.png';
-
     case '水原三星':
       return 'https://sortitoutsi.net/uploads/team/106813.png';
     case 'FC首尔':
