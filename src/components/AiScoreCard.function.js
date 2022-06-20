@@ -110,24 +110,22 @@ export function returnTeamIcon(name) {
       return 'https://sortitoutsi.net/uploads/flags/144.png';
     case '沙特U23':
       return 'https://sortitoutsi.net/uploads/flags/133.png';
-    // havent done
     case '维京':
-      return 'https://sortitoutsi.net/uploads/team/775187.png';
+      return 'https://sortitoutsi.net/uploads/team/1422.png';
     case '桑德菲杰':
-      return 'https://sortitoutsi.net/uploads/team/107303.png';
+      return 'https://sortitoutsi.net/uploads/team/1380.png';
     case '特罗姆瑟':
-      return 'https://sortitoutsi.net/uploads/team/107283.png';
+      return 'https://sortitoutsi.net/uploads/team/1410.png';
     case '海于格松':
-      return 'https://sortitoutsi.net/uploads/team/7100042.png';
+      return 'https://sortitoutsi.net/uploads/team/1326.png';
     case '利勒斯特':
-      return 'https://sortitoutsi.net/uploads/team/786372.png';
+      return 'https://sortitoutsi.net/uploads/team/1341.png';
     case '罗森博格':
-      return 'https://sortitoutsi.net/uploads/team/786384.png';
+      return 'https://sortitoutsi.net/uploads/team/1376.png';
     case '谢夫':
-      return 'https://sortitoutsi.net/uploads/team/106817.png';
+      return 'https://sortitoutsi.net/uploads/team/1330.png';
     case '汉坎':
-      return 'https://sortitoutsi.net/uploads/team/106817.png';
-    // havent done
+      return 'https://sortitoutsi.net/uploads/team/103283.png';
     default:
       return 'https://www.nepal90.com/images/original/icon_team.png';
   }
