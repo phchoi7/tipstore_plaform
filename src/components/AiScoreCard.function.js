@@ -157,6 +157,91 @@ export function returnTeamIcon(name) {
       return 'https://sortitoutsi.net/uploads/team/1330.png';
     case '汉坎':
       return 'https://sortitoutsi.net/uploads/team/103283.png';
+
+    case '城南FC':
+      return 'https://sortitoutsi.net/uploads/team/200373.png';
+    case '大邱FC':
+      return 'https://sortitoutsi.net/uploads/team/5705626.png';
+    case '蔚山现代':
+      return 'https://sortitoutsi.net/uploads/team/106808.png';
+    case '札幌冈萨':
+      return 'https://sortitoutsi.net/uploads/team/107285.png';
+    case '甲府风林':
+      return 'https://sortitoutsi.net/uploads/team/107314.png';
+    case '柏太阳神':
+      return 'https://sortitoutsi.net/uploads/team/1190.png';
+    case '神户胜利':
+      return 'https://sortitoutsi.net/uploads/team/106844.png';
+    case '金泽赛维':
+      return 'https://sortitoutsi.net/uploads/team/775165.png';
+    case '名古屋鲸':
+      return 'https://sortitoutsi.net/uploads/team/1191.png';
+    case '大阪樱花':
+      return 'https://sortitoutsi.net/uploads/team/1185.png';
+    case '大阪钢巴':
+      return 'https://sortitoutsi.net/uploads/team/1186.png';
+    case '川崎前锋':
+      return 'https://sortitoutsi.net/uploads/team/107296.png';
+    case '广岛三箭':
+      return 'https://sortitoutsi.net/uploads/team/1193.png';
+    case '横滨水手':
+      return 'https://sortitoutsi.net/uploads/team/1198.png';
+    case '全北现代':
+      return 'https://sortitoutsi.net/uploads/team/130776.png';
+
+    case '博塔弗戈':
+      return 'https://sortitoutsi.net/uploads/team/316.png';
+    case '圣保罗':
+      return 'https://sortitoutsi.net/uploads/team/337.png';
+    case '帕梅拉斯':
+      return 'https://sortitoutsi.net/uploads/team/329.png';
+    case '戈竞技':
+      return 'https://sortitoutsi.net/uploads/team/301151.png';
+    case '阿瓦伊':
+      return 'https://sortitoutsi.net/uploads/team/107208.png';
+    case '福塔雷萨':
+      return 'https://sortitoutsi.net/uploads/team/104750.png';
+    case '西雅图':
+      return 'https://sortitoutsi.net/uploads/team/72014006.png';
+    case '洛杉矶FC':
+      return 'https://sortitoutsi.net/uploads/team/72049313.png';
+    case '洛城银河':
+      return 'https://sortitoutsi.net/uploads/team/1907.png';
+    case '波特兰':
+      return 'https://sortitoutsi.net/uploads/team/975489.png';
+    case '奎尔巴':
+      return 'https://sortitoutsi.net/uploads/team/318915.png';
+    case '塞阿拉':
+      return 'https://sortitoutsi.net/uploads/team/104749.png';
+    case '纽约红牛':
+      return 'https://sortitoutsi.net/uploads/team/72000160.png';
+    case '多伦多FC':
+      return 'https://sortitoutsi.net/uploads/team/72000789.png';
+    case '费城联合':
+      return 'https://sortitoutsi.net/uploads/team/72019000.png';
+    case '辛辛那提':
+      return 'https://sortitoutsi.net/uploads/team/20041327.png';
+    case '奥兰多城':
+      return 'https://sortitoutsi.net/uploads/team/72014193.png';
+    case '休斯敦':
+      return 'https://sortitoutsi.net/uploads/team/72000112.png';
+    case '蒙特利尔CF':
+      return 'https://sortitoutsi.net/uploads/team/2000152066.png';
+    case '奥斯汀FC':
+      return 'https://sortitoutsi.net/uploads/team/72053036.png';
+    case '哥伦布':
+      return 'https://sortitoutsi.net/uploads/team/1904.png';
+    case '夏洛特FC':
+      return 'https://sortitoutsi.net/uploads/team/20032874.png';
+    case '芝加哥':
+      return 'https://sortitoutsi.net/uploads/team/108893.png';
+    case '华盛顿联':
+      return 'https://sortitoutsi.net/uploads/team/1913.png';
+    case '温哥华':
+      return 'https://sortitoutsi.net/uploads/team/4400014.png';
+    case '达拉斯FC':
+      return 'https://sortitoutsi.net/uploads/team/1905.png';
+
     default:
       return 'https://www.nepal90.com/images/original/icon_team.png';
   }
