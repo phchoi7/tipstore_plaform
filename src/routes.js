@@ -23,6 +23,7 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'matches/:matchId', element: <Matches /> },
         { path: 'blog', element: <Blog /> },
+        { path: '*', element: <Navigate to="/404" /> },
       ],
     },
     {

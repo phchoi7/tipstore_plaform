@@ -9,8 +9,9 @@ import Paper from '@mui/material/Paper';
 import { Box, CircularProgress, Typography, Button, Modal } from '@mui/material';
 import './LiveScore.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { checkName } from './AiScoreCard.function';
+import { checkName, checkLeagueName } from './AiScoreCard.function';
 import BasicModal from './BasicModal';
+import Avatar from '@mui/material/Avatar';
 
 const convert = require('chinese_convert');
 
@@ -59,9 +60,7 @@ export default function AiScoreCard({ data, user }) {
 
   const DetailsButton = (matchDetails) => {
     const { matchId } = useParams();
-    console.log(matchId);
     const handelMatchDetails = () => {
-      console.log('navigate!!');
       navigate(`../matches/${matchDetails.matchDetails.matchId}`, { state: matchDetails.matchDetails });
     };
 
@@ -79,6 +78,7 @@ export default function AiScoreCard({ data, user }) {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
+            <TableCell>Start</TableCell>
             <TableCell>Date 日子</TableCell>
             <TableCell>Teams 比賽</TableCell>
             <TableCell align="right">System Choice 系統分析勝負</TableCell>
@@ -90,18 +90,44 @@ export default function AiScoreCard({ data, user }) {
         {user ? (
           <TableBody>
             {data.map((data) => (
-              <TableRow key={data.homeTeam} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableRow
+                key={data.matchId}
+                sx={{
+                  '&:last-child td, &:last-child th': { border: 0 },
+                  background: data.isOk === '1' ? '#d8fbd5' : data.isOk === '0' ? 'none' : '#fbd5eb',
+                }}
+              >
+                <TableCell>
+                  {data.matchLong === '未' ? (
+                    <span className="tag tag--icon">
+                      <svg width={6} height={6} viewBox="0 0 8 8">
+                        <circle fill="#613cea" cx={4} cy={4} r={4} />
+                      </svg>
+                      未開始
+                    </span>
+                  ) : data.matchLong === '完' ? (
+                    <span className="tag tag--red tag--icon">
+                      <svg width={6} height={6} viewBox="0 0 8 8">
+                        <circle fill="#efefef" cx={4} cy={4} r={4} />
+                      </svg>
+                      己完場
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                </TableCell>
                 <TableCell component="th" scope="row">
                   {data.matchTime}
                 </TableCell>
-                <TableCell align="right">
+                <TableCell>
+                  <Avatar alt={data.typeName} src={checkLeagueName(data.typeName)} sx={{ width: 20, height: 20 }} />
                   {convert.cn2tw(checkName(data.homeTeam))} vs {convert.cn2tw(checkName(data.visitTeam))}
                 </TableCell>
                 <TableCell align="right">
-                  <CircularProgressWithLabel value={data.recPercent} />
+                  <CircularProgressWithLabel value={Number(data.recPercent)} />
                 </TableCell>
                 <TableCell align="right">{data.matchResult === '胜' ? '主隊' : '客隊'}</TableCell>
-                <TableCell align="right"> {data.result1 === '0:0' ? '未開始' : data.result1}</TableCell>
+                <TableCell align="right"> {data.result1}</TableCell>
                 <TableCell align="right">
                   <DetailsButton matchDetails={data} />
                 </TableCell>

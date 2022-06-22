@@ -38,22 +38,31 @@ export default function Matches() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getDetailLeftLists(location.state.matchId)
+    const pathMatchId = location.pathname.slice(19);
+    getDetailLeftLists(location.state ? location.state.matchId : pathMatchId)
       .then((response) => {
-        setMatchAnalyze(response);
+        try {
+          setMatchAnalyze(response);
+        } catch {
+          navigate(-1);
+        }
       })
       .finally(() => {
         setLoaded(false);
       });
 
-    getDetailYcChartsInfo(location.state.matchId)
+    getDetailYcChartsInfo(location.state ? location.state.matchId : pathMatchId)
       .then((response) => {
-        setMatches(response);
+        try {
+          setMatches(response);
+        } catch {
+          navigate(-1);
+        }
       })
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [location]);
 
   const goBack = () => {
     navigate(-1);
