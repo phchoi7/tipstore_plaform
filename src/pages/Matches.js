@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 // material
-import { Container, Stack, Typography, Grid, Card, CardHeader, Box } from '@mui/material';
+import { Container, Stack, Typography, Grid, Card, CardHeader, Box, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
 import { ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 // mock
 import PRODUCTS from '../_mock/products';
 import MatchesCard from 'src/components/matchesCard';
-import { getDetailLeftLists, getDetailYcChartsInfo} from '../services/apiServices';
+import { getDetailLeftLists, getDetailYcChartsInfo } from '../services/apiServices';
 import {
   AppTasks,
   AppNewsUpdate,
@@ -21,8 +21,10 @@ import {
 } from '../sections/@dashboard/app';
 import { useTheme } from '@mui/material/styles';
 import { faker } from '@faker-js/faker';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 // ----------------------------------------------------------------------
 
 export default function Matches() {
@@ -33,45 +35,62 @@ export default function Matches() {
   const [matchAnalyze, setMatchAnalyze] = useState();
   const [match, setMatches] = useState();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getDetailLeftLists(location.state.matchId).then((response) => {
-      setMatchAnalyze(response);
-    }).finally(() => {
-      setLoaded(false);
-    });
+    getDetailLeftLists(location.state.matchId)
+      .then((response) => {
+        setMatchAnalyze(response);
+      })
+      .finally(() => {
+        setLoaded(false);
+      });
 
-    getDetailYcChartsInfo(location.state.matchId).then((response) => {
-      setMatches(response);
-     
-    }).finally(()=>{
-      setLoading(false);
-    });
+    getDetailYcChartsInfo(location.state.matchId)
+      .then((response) => {
+        setMatches(response);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
-  console.log('matchAnalyze:',matchAnalyze);
-  console.log('matchs:',match);
-
-  console.log('data : ',location.state)
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const loadingArea = () => {
     return (
-      <Grid item xs={12} sx={{textAlign:'center'}}>
-                <CircularProgress />
-              </Grid>
-      
-    )
-  }
+      <Grid item xs={12} sx={{ textAlign: 'center' }}>
+        <CircularProgress />
+      </Grid>
+    );
+  };
 
   return (
     <Page title="Dashboard: Products">
       <Container>
-        {isLoading && isLoaded ? loadingArea() : 
-                <><Typography variant="h4" sx={{ mb: 5 }}>
-            Match Details
-          </Typography><Grid container spacing={3}>
+        {isLoading && isLoaded ? (
+          loadingArea()
+        ) : (
+          <>
+            <Grid item xs={12} sx={{ display: 'flex', alignItems: 'baseline' }}>
+              <Button onClick={goBack}>
+                <ArrowBackIcon />
+              </Button>
+
+              <Typography variant="h4" sx={{ mb: 5 }}>
+                Match Details
+              </Typography>
+            </Grid>
+            <Grid container spacing={3}>
               <Grid item xs={12} sx={{ mb: 5 }}>
-                <MatchesCard guessWin={match ? match.analyInfo.winner : ''} guessHalfFull={match ? match.analyInfo.halfWholeResult : ''} guessScore={match ? match.analyInfo.scoreResult : ''} data={location.state} />
+                <MatchesCard
+                  guessWin={match ? match.analyInfo.winner : ''}
+                  guessHalfFull={match ? match.analyInfo.halfWholeResult : ''}
+                  guessScore={match ? match.analyInfo.scoreResult : ''}
+                  data={location.state}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={4}>
@@ -86,7 +105,8 @@ export default function Matches() {
                     theme.palette.primary.main,
                     theme.palette.chart.yellow[0],
                     theme.palette.chart.violet[0],
-                  ]} />
+                  ]}
+                />
               </Grid>
 
               <Grid item xs={12} md={6} lg={4}>
@@ -103,13 +123,14 @@ export default function Matches() {
                     ][index],
                     type: `order${index + 1}`,
                     time: faker.date.past(),
-                  }))} />
+                  }))}
+                />
               </Grid>
 
-
               <ProductCartWidget />
-            </Grid></>
-}
+            </Grid>
+          </>
+        )}
       </Container>
     </Page>
   );
