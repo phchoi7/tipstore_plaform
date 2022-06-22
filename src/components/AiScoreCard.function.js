@@ -255,16 +255,16 @@ export function checkLeagueName(name) {
       return 'https://sortitoutsi.net/uploads/comp/136407.png';
     case '巴西杯':
       return 'https://sortitoutsi.net/uploads/flags/1651.png';
-    case '切尔西':
-      return '車路士';
-    case '阿森纳':
-      return '阿仙奴';
-    case '尤文图斯':
-      return '祖雲達斯';
-    case '诺维奇':
+    case '日职联':
+      return 'https://sortitoutsi.net/uploads/flags/116.png';
+    case '日职乙':
+      return 'https://sortitoutsi.net/uploads/flags/116.png';
+    case '挪超':
+      return 'https://sortitoutsi.net/uploads/flags/786.png';
+    case '亚青U223':
       return '諾域治';
-    case '吉马良斯':
-      return '甘馬雷斯';
+    case '美职业':
+      return 'https://sortitoutsi.net/uploads/flags/390.png';
     case '巴黎圣日尔曼':
       return '巴黎聖日爾門';
     case '利兹联':
