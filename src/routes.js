@@ -38,8 +38,7 @@ export default function Router() {
         { path: '*', element: <Navigate to="/404" /> },
       ],
     },
-    { path: '/dashboard/app', element: <DashboardApp /> },
-    { path: '/dashboard/matches/:matchId', element: <Matches /> },
+    { path: '/dashboard/app', element: <Navigate to="/dashboard/app" /> },
 
     { path: '*', element: <Navigate to="/404" replace /> },
   ]);
