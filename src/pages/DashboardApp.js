@@ -32,8 +32,6 @@ export default function DashboardApp() {
   const auth = getAuth();
   const user = auth.currentUser;
 
-  console.log('user:', user);
-
   const loadingArea = () => {
     return (
       <Grid item xs={12} sx={{ textAlign: 'center' }}>
@@ -59,7 +57,7 @@ export default function DashboardApp() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [user]);
 
   return (
     <Page title="Dashboard">
