@@ -39,6 +39,7 @@ export default function Router() {
       ],
     },
     { path: '/dashboard/app', element: <DashboardApp /> },
+    { path: '/dashboard/matches/:matchId', element: <Matches /> },
 
     { path: '*', element: <Navigate to="/404" replace /> },
   ]);
