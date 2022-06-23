@@ -10,6 +10,7 @@ import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Matches from './pages/Matches';
 import DashboardApp from './pages/DashboardApp';
+import { element } from 'prop-types';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +38,8 @@ export default function Router() {
         { path: '*', element: <Navigate to="/404" /> },
       ],
     },
+    { path: '/dashboard/app', element: <DashboardApp /> },
+
     { path: '*', element: <Navigate to="/404" replace /> },
   ]);
 }
