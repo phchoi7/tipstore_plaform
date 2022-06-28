@@ -7,7 +7,7 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@
 import MenuPopover from '../../components/MenuPopover';
 // mocks_
 import account from '../../_mock/account';
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth, signOut, updateProfile } from 'firebase/auth';
 import { useCookies } from 'react-cookie';
 
 // ----------------------------------------------------------------------
@@ -44,6 +44,9 @@ export default function AccountPopover() {
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
+    // updateProfile(auth.currentUser, {
+    //   tenantId: 1,
+    // });
   };
 
   const handleClose = () => {
@@ -87,7 +90,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={user?.photoURL ? user?.photoURL : account.photoURL} alt="photoURL" />
+        <Avatar src={user && user.photoURL} alt="photoURL" />
       </IconButton>
 
       <MenuPopover

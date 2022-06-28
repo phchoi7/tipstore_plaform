@@ -37,7 +37,6 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
     }
   };
 
-  console.log(total, 'totaaa', checkString());
   return (
     <Card
       sx={{

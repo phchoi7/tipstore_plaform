@@ -61,7 +61,7 @@ export default function AiScoreCard({ data, user }) {
   const DetailsButton = (matchDetails) => {
     const { matchId } = useParams();
     const handelMatchDetails = () => {
-      navigate(`../matches/${matchDetails.matchDetails.matchId}`, { state: matchDetails.matchDetails });
+      navigate(`../dashboard/matches/${matchDetails.matchDetails.matchId}`, { state: matchDetails.matchDetails });
     };
 
     return (

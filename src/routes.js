@@ -31,14 +31,13 @@ export default function Router() {
       path: '/',
       element: <LogoOnlyLayout />,
       children: [
-        { path: '/', element: <Navigate to="/dashboard/app" /> },
+        { path: '/', element: <DashboardLayout />, children: [{ path: '', element: <DashboardApp /> }] },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
     },
-    { path: '/dashboard/app', element: <Navigate to="/dashboard/app" /> },
 
     { path: '*', element: <Navigate to="/404" replace /> },
   ]);
