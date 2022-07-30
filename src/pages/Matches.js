@@ -32,6 +32,7 @@ export default function Matches() {
   const [openFilter, setOpenFilter] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [isLoaded, setLoaded] = useState(true);
+  const [isGoalReady, setGoalReady] = useState(true);
   const [matchAnalyze, setMatchAnalyze] = useState();
   const [matchHistory, setMatchHistory] = useState();
   const [homeGoal, setHomeGoal] = useState({
@@ -48,12 +49,17 @@ export default function Matches() {
     goalDiffCountMatch:'',
     total:''
   });
+  const [matchGoalDiff, setMatchGoalDiff] = useState({
+    home:'',
+    away:''
+  });
   const [match, setMatches] = useState();
   const location = useLocation();
+  const pathMatchId = location.pathname.slice(19);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const pathMatchId = location.pathname.slice(19);
+
     getDetailLeftLists(location.state ? location.state.matchId : pathMatchId)
       .then((response) => {
         try {
@@ -130,11 +136,43 @@ export default function Matches() {
         }
       })
       .finally(() => {
-        setLoading(false);
+        setGoalReady(false);
       });
+
   }, [location]);
 
+  useEffect(()=> {
+
+
+    const calForTheGoal = () => {
+      if(homeGoal.goalDifferentCountMatch >awayGoal.goalDifferentCountMatch ) {
+        const goalDiffResult = homeGoal.goalDifferentCountMatch - awayGoal.goalDifferentCountMatch
+        setMatchGoalDiff({
+          home:goalDiffResult,
+          away:0
+        })
+        console.log('gogg:', homeGoal.goalDifferentCountMatch ,'-',awayGoal.goalDifferentCountMatch ,goalDiffResult)
+      }else{
+        const goalDiffResult =  awayGoal.goalDifferentCountMatch - homeGoal.goalDifferentCountMatch
+        setMatchGoalDiff({
+          home:0,
+          away:goalDiffResult
+        })
+        console.log('gogg:' ,awayGoal.goalDifferentCountMatch, '-',homeGoal.goalDifferentCountMatch ,goalDiffResult)
+      }
+     
+
+    }
+
+    if(homeGoal && awayGoal){
+      calForTheGoal()
+    }
+
+
+  },[homeGoal,awayGoal])
+
   console.log('homegoal',homeGoal)
+  console.log('away',awayGoal)
 
   const goBack = () => {
     navigate(-1);
@@ -196,8 +234,8 @@ export default function Matches() {
               title="Goal Difference Rates"
               subheader={`${homeGoal.total} game`}
               chartData={[
-                { label: `Home Team`, value: homeGoal && Number(homeGoal.goalDifferentCountMatch) },
-                { label: 'Away Team', value: awayGoal && Number(awayGoal.goalDifferentCountMatch) },
+                { label: `Home Team : \n${matchGoalDiff.home.toFixed(2)}`, value: matchGoalDiff && Number(matchGoalDiff.home) },
+                { label: `Away Team :\n${matchGoalDiff.away.toFixed(2)}`, value: matchGoalDiff && Number(matchGoalDiff.away) },
               ]}
             />
           </Grid>
