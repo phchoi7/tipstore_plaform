@@ -79,5 +79,22 @@ export const getSpecialOffer = async () => {
     return res.json();
   };
 
+  export const getHistoryDetail = async (rowNo) => {
+    const ProxyServer = 'https://cors.bridged.cc/';
+  
+    const res = await fetch(`${ProxyServer}http://www.woxiangwan.com/zcj/jincai/getDetailZjLists?rowNo=${rowNo}`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        origin: '*',
+        'x-request-url': 'txt-api.7m.com.cn',
+        'x-cors-grida-api-key': 'fec76fa0-7a9f-44e5-b4da-1ad50c338b43',
+      },
+    });
+  
+    return res.json();
+  };
+
+
 
 

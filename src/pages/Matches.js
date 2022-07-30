@@ -7,7 +7,7 @@ import { ProductList, ProductCartWidget, ProductFilterSidebar } from '../section
 // mock
 import PRODUCTS from '../_mock/products';
 import MatchesCard from 'src/components/matchesCard';
-import { getDetailLeftLists, getDetailYcChartsInfo } from '../services/apiServices';
+import { getDetailLeftLists, getDetailYcChartsInfo ,getHistoryDetail} from '../services/apiServices';
 import {
   AppTasks,
   AppNewsUpdate,
@@ -19,12 +19,12 @@ import {
   AppCurrentSubject,
   AppConversionRates,
 } from '../sections/@dashboard/app';
+import ColumnDataTable from '../sections/@dashboard/app/ColumnDataTable'
 import { useTheme } from '@mui/material/styles';
 import { faker } from '@faker-js/faker';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
 // ----------------------------------------------------------------------
 
 export default function Matches() {
@@ -33,6 +33,21 @@ export default function Matches() {
   const [isLoading, setLoading] = useState(true);
   const [isLoaded, setLoaded] = useState(true);
   const [matchAnalyze, setMatchAnalyze] = useState();
+  const [matchHistory, setMatchHistory] = useState();
+  const [homeGoal, setHomeGoal] = useState({
+    goal:'',
+    lose:'',
+    goalDifferent:'',
+    goalDiffCountMatch:'',
+    total:''
+  });
+  const [awayGoal, setAwayGoal] = useState({
+    goal:'',
+    lose:'',
+    goalDifferent:'',
+    goalDiffCountMatch:'',
+    total:''
+  });
   const [match, setMatches] = useState();
   const location = useLocation();
   const navigate = useNavigate();
@@ -62,7 +77,64 @@ export default function Matches() {
       .finally(() => {
         setLoading(false);
       });
+
+      getHistoryDetail(location.state ? location.state.matchId : pathMatchId)
+      .then((response) => {
+        try {
+          setMatchHistory(response);
+          console.log('setMatchHistory',response)
+          response.homeStacList.forEach((items) => {
+            
+              console.log(items)
+
+              if(items.type === '总'){
+                const  goalDiff = items.obtainCount - items.loseCount
+                const goalDiffCountMatch = goalDiff / items.matchCount
+                const tempHome = {
+                  goal: items.obtainCount,
+                  lose:items.loseCount,
+                  goalDifferent: goalDiff,
+                  goalDifferentCountMatch: goalDiffCountMatch,
+                  total:items.matchCount
+                }
+                setHomeGoal(tempHome)
+              }
+            
+           
+          })
+
+          response.custStacList.forEach((items) => {
+            
+            console.log(items)
+            
+
+            if(items.type === '总'){
+              const  goalDiff = items.obtainCount - items.loseCount
+              const goalDiffCountMatch = goalDiff / items.matchCount
+              const tempAway = {
+                goal: items.obtainCount,
+                lose:items.loseCount,
+                goalDifferent: goalDiff,
+                goalDifferentCountMatch: goalDiffCountMatch,
+                total:items.matchCount
+              }
+              setAwayGoal(tempAway)
+            }
+          
+         
+        })
+
+
+        } catch {
+          navigate(-1);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [location]);
+
+  console.log('homegoal',homeGoal)
 
   const goBack = () => {
     navigate(-1);
@@ -76,6 +148,7 @@ export default function Matches() {
     );
   };
 
+ 
   return (
     <Page title="Dashboard: Products">
       <Container>
@@ -118,25 +191,17 @@ export default function Matches() {
                 />
               </Grid>
 
-              <Grid item xs={12} md={6} lg={4}>
-                <AppOrderTimeline
-                  title="Order Timeline"
-                  list={[...Array(5)].map((_, index) => ({
-                    id: faker.datatype.uuid(),
-                    title: [
-                      '1983, orders, $4220',
-                      '12 Invoices have been paid',
-                      'Order #37745 from September',
-                      'New order placed #XF-2356',
-                      'New order placed #XF-2346',
-                    ][index],
-                    type: `order${index + 1}`,
-                    time: faker.date.past(),
-                  }))}
-                />
-              </Grid>
+              <Grid item xs={12} md={6} lg={8}>
+            <AppConversionRates
+              title="Goal Difference Rates"
+              subheader={`${homeGoal.total} game`}
+              chartData={[
+                { label: `Home Team`, value: homeGoal && Number(homeGoal.goalDifferentCountMatch) },
+                { label: 'Away Team', value: awayGoal && Number(awayGoal.goalDifferentCountMatch) },
+              ]}
+            />
+          </Grid>
 
-              <ProductCartWidget />
             </Grid>
           </>
         )}
