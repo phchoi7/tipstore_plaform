@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
@@ -41,6 +41,7 @@ export default function AccountPopover() {
   const user = auth.currentUser;
   const JWT_TOKEN_COOKIE_NAME = 'token';
   const [cookies, setCookie, removeCookie] = useCookies([JWT_TOKEN_COOKIE_NAME]);
+  const [userInfo, setUserInfo] = useState({});
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -69,6 +70,10 @@ export default function AccountPopover() {
   const handleLogin = () => {
     navigate('/login', { replace: true });
   };
+
+  useEffect(() => {
+    setUserInfo(user);
+  }, [userInfo]);
 
   return (
     <>
@@ -111,10 +116,10 @@ export default function AccountPopover() {
           <>
             <Box sx={{ my: 1.5, px: 2.5 }}>
               <Typography variant="subtitle2" noWrap>
-                {user?.displayName ? user?.displayName : account.displayName}
+                {user && user.displayName}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-                {user?.email ? user?.email : account.email}
+                {user && user.email}
               </Typography>
             </Box>
             <Divider sx={{ borderStyle: 'dashed' }} />
